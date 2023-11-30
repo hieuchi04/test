@@ -11,6 +11,6 @@ from .serializers import *
 
 class ProductView(APIView):
     def get(self, request):
-        product = Product.objects.all()
+        product = Product.objects.all().prefetch_related('productimage_set')
         serializers = ProductSerializer(product, many=True)
         return Response(data=serializers.data)
